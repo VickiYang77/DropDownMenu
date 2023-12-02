@@ -8,12 +8,18 @@
 import UIKit
 
 class ViewController: UIViewController {
+    
+    let colors: [String] = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
     }
-
-
+    
+    @IBAction func dropDownMenuTap(_ sender: Any) {
+        let vc = DropDownMenuCollectionViewController(items: colors) { (cell, item) in
+            cell.titleLabel.text = item
+        }
+        present(vc, animated: true)
+    }
 }
 

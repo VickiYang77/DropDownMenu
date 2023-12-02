@@ -13,6 +13,8 @@
 		991FEA4A2B1B028D00032F6C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991FEA482B1B028D00032F6C /* Main.storyboard */; };
 		991FEA4C2B1B028F00032F6C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 991FEA4B2B1B028F00032F6C /* Assets.xcassets */; };
 		991FEA4F2B1B028F00032F6C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 991FEA4D2B1B028F00032F6C /* LaunchScreen.storyboard */; };
+		991FEA592B1B064300032F6C /* DropDownMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991FEA582B1B064300032F6C /* DropDownMenuCell.swift */; };
+		991FEA5B2B1B125600032F6C /* DropDownMenuCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 991FEA5A2B1B125600032F6C /* DropDownMenuCollectionViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +26,8 @@
 		991FEA4B2B1B028F00032F6C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		991FEA4E2B1B028F00032F6C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		991FEA502B1B028F00032F6C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		991FEA582B1B064300032F6C /* DropDownMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenuCell.swift; sourceTree = "<group>"; };
+		991FEA5A2B1B125600032F6C /* DropDownMenuCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownMenuCollectionViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +67,8 @@
 				991FEA4B2B1B028F00032F6C /* Assets.xcassets */,
 				991FEA4D2B1B028F00032F6C /* LaunchScreen.storyboard */,
 				991FEA502B1B028F00032F6C /* Info.plist */,
+				991FEA582B1B064300032F6C /* DropDownMenuCell.swift */,
+				991FEA5A2B1B125600032F6C /* DropDownMenuCollectionViewController.swift */,
 			);
 			path = DropDownMenu;
 			sourceTree = "<group>";
@@ -141,6 +147,8 @@
 				991FEA472B1B028D00032F6C /* ViewController.swift in Sources */,
 				991FEA432B1B028D00032F6C /* AppDelegate.swift in Sources */,
 				991FEA452B1B028D00032F6C /* SceneDelegate.swift in Sources */,
+				991FEA5B2B1B125600032F6C /* DropDownMenuCollectionViewController.swift in Sources */,
+				991FEA592B1B064300032F6C /* DropDownMenuCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
