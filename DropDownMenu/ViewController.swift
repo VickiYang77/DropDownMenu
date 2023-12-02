@@ -13,24 +13,36 @@ struct ColorCellModel {
 }
 
 class ViewController: UIViewController {
-    let rainbowColors: [UIColor] = [.red, .orange, .yellow, .green, .blue, .systemIndigo, .purple]
-    let colorNames = ["Red", "Orange", "Yellow", "Green", "Blue", "Indigo", "Violet"]
-    lazy var colorItems = zip(rainbowColors, colorNames).map { color, name in
-        return ColorCellModel(title: name, color: color)
-    }
+    let colorItems = [
+        ColorCellModel(title: "Red", color: .red),
+        ColorCellModel(title: "Orange", color: .orange),
+        ColorCellModel(title: "Yellow", color: .yellow),
+        ColorCellModel(title: "Green", color: .green),
+        ColorCellModel(title: "Blue", color: .blue),
+        ColorCellModel(title: "Indigo", color: .systemIndigo),
+        ColorCellModel(title: "Violet", color: .purple)
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
     }
     
-    @IBAction func dropDownMenuTap(_ sender: Any) {
-        let vc = DropDownMenuCollectionViewController(items: colorItems, configureCell: { (cell, item) in
+    @IBAction func dropDownMenuTap(_ sender: UIButton) {
+        let dropDownMenuVC = DropDownMenuCollectionViewController(items: colorItems, configureCell: { (cell, item) in
             cell.titleLabel.text = item.title
+            cell.titleLabel.textColor = item.color
+            cell.titleLabel.font = .systemFont(ofSize: 20)
         }) { [weak self] (index, item) in
             self?.view.backgroundColor = item.color
         }
-
-        present(vc, animated: true)
+        
+        if let popoverPresentationController = dropDownMenuVC.popoverPresentationController {
+            popoverPresentationController.permittedArrowDirections = .up
+            popoverPresentationController.sourceView = sender
+            popoverPresentationController.sourceRect = sender.bounds
+        }
+        
+        present(dropDownMenuVC, animated: true)
     }
 }
 

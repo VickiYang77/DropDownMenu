@@ -7,11 +7,12 @@
 
 import UIKit
 
-class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICollectionViewDelegateFlowLayout, UIPopoverPresentationControllerDelegate {
     
     var items: [T]
     var configureCell: (DropDownMenuCell, T) -> Void
     var selectHandler: ((Int, T) -> Void)?
+    var cellHeight: CGFloat = 50
     
     init(items: [T], configureCell: @escaping (DropDownMenuCell, T) -> Void, selectHandler: ((Int, T) -> Void)? = nil) {
         self.items = items
@@ -24,7 +25,6 @@ class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICol
         layout.minimumLineSpacing = 7 // 上下間距
         super.init(collectionViewLayout: layout)
         
-        collectionView.backgroundColor = .yellow
         collectionView.showsHorizontalScrollIndicator = false
         collectionView.showsVerticalScrollIndicator = false
         collectionView.bounces = true
@@ -32,6 +32,12 @@ class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICol
         collectionView.delegate = self
         collectionView.dataSource = self
         collectionView!.register(DropDownMenuCell.self, forCellWithReuseIdentifier: DropDownMenuCell.identifier)
+        
+        // popover
+        self.modalPresentationStyle = .popover
+        self.preferredContentSize = CGSize(width: 300, height: items.count / 3 * Int(cellHeight))
+        self.popoverPresentationController?.delegate = self
+//        self.po//popoverController.permittedArrowDirections = .any
     }
     
     required init?(coder: NSCoder) {
@@ -61,7 +67,7 @@ class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICol
         let item = items[indexPath.row]
         
         DispatchQueue.main.async {
-            self.dismiss(animated: true) {[weak self] in
+            self.dismiss(animated: false) {[weak self] in
                 self?.selectHandler?(indexPath.row, item)
             }
         }
@@ -71,6 +77,18 @@ class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICol
     // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = floor((collectionView.frame.width - 5) / 3)
-        return CGSize(width: width, height: 50)
+        return CGSize(width: width, height: cellHeight)
+    }
+    
+    
+    // MARK: UIPopoverPresentationControllerDelegate
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        //.none 可確保 popover 在 iPad 上不會根據裝置的大小自動轉換為全螢幕 modal 形式呈現
+        return .none
+    }
+
+    func popoverPresentationControllerShouldDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) -> Bool {
+        // 返回 true 允許 popover 被取消，返回 false 則不允許
+        return true
     }
 }
