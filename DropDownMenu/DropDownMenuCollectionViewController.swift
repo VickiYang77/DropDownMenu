@@ -11,9 +11,9 @@ class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICol
     
     var items: [T]
     var configureCell: (DropDownMenuCell, T) -> Void
-    var selectHandler: ((Int) -> Void)?
+    var selectHandler: ((Int, T) -> Void)?
     
-    init(items: [T], configureCell: @escaping (DropDownMenuCell, T) -> Void, selectHandler: ((Int) -> Void)? = nil) {
+    init(items: [T], configureCell: @escaping (DropDownMenuCell, T) -> Void, selectHandler: ((Int, T) -> Void)? = nil) {
         self.items = items
         self.configureCell = configureCell
         self.selectHandler = selectHandler
@@ -58,10 +58,11 @@ class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICol
     // MARK: UICollectionViewDelegate
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard indexPath.row < items.count else { return }
+        let item = items[indexPath.row]
         
         DispatchQueue.main.async {
             self.dismiss(animated: true) {[weak self] in
-                self?.selectHandler?(indexPath.row)
+                self?.selectHandler?(indexPath.row, item)
             }
         }
     }
