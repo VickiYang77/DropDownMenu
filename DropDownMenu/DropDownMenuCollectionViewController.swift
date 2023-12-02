@@ -7,13 +7,13 @@
 
 import UIKit
 
-class DropDownMenuCollectionViewController: UICollectionViewController {
+class DropDownMenuCollectionViewController<T>: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    var items: [String]
-    var configureCell: (DropDownMenuCell, String) -> Void
+    var items: [T]
+    var configureCell: (DropDownMenuCell, T) -> Void
     var selectHandler: ((Int) -> Void)?
     
-    init(items: [String], configureCell: @escaping (DropDownMenuCell, String) -> Void, selectHandler: ((Int) -> Void)? = nil) {
+    init(items: [T], configureCell: @escaping (DropDownMenuCell, T) -> Void, selectHandler: ((Int) -> Void)? = nil) {
         self.items = items
         self.configureCell = configureCell
         self.selectHandler = selectHandler
@@ -65,11 +65,9 @@ class DropDownMenuCollectionViewController: UICollectionViewController {
             }
         }
     }
-}
-
-// MARK: UICollectionViewDelegateFlowLayout
-extension DropDownMenuCollectionViewController: UICollectionViewDelegateFlowLayout {
     
+    
+    // MARK: UICollectionViewDelegateFlowLayout
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = floor((collectionView.frame.width - 5) / 3)
         return CGSize(width: width, height: 50)
